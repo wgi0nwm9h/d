@@ -17,7 +17,7 @@ function scheduler:fire(id, ...)
 	local f = self.scheduled[id];
 	
 	if (f) then
-		f(...);
+		task.spawn(f, ...);
 	end
 end
 

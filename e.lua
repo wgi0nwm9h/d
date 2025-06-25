@@ -11,20 +11,16 @@ function cleaner.new()
 	return setmetatable(self, cleaner);
 end
 
-function cleaner:add_thread(id, func)
-	self.threads[id] = task.spawn(func);
+function cleaner:add_thread(func)
+	table.insert(self.threads, task.spawn(func));
 end
 
-function cleaner:add_connection(id, connection)
-	self.connections[id] = connection;
+function cleaner:add_connection(connection)
+	table.insert(self.connections, connection);
 end
 
-function cleaner:add_function(id, _function)
-	self.functions[id] = _function;
-end
-
-function cleaner:get_by_id(id)
-	return self.threads[id] or self.connections[id] or self.functions[id];
+function cleaner:add_function(_function)
+	table.insert(self.functions, _function);
 end
 
 function cleaner:clean_up()
